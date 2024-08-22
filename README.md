@@ -4,22 +4,22 @@ This project demonstrates a PDF chatbot utilizing Upstash's RAGChat and OpenAI's
 
 ## Features
 
-* Uploading PDF files and extracting text.
-* Chat interface for interacting with the extracted content.
+-   Uploading PDF files and extracting text.
+-   Chat interface for interacting with the extracted content.
 
 ## Project Structure
 
-* api/chat/route.ts: Handles chat requests.
-* components/chat.tsx: Main chat interface component.
-* pages/api/pdf-extractor.ts: Extracts text from uploaded PDF files.
-* utils/rag-chat.ts: Configures RAGChat with OpenAI's GPT-4 model.
-  
+-   api/chat/route.ts: Handles chat requests.
+-   components/chat.tsx: Main chat interface component.
+-   pages/api/pdf-extractor.ts: Extracts text from uploaded PDF files.
+-   utils/rag-chat.ts: Configures RAGChat with OpenAI's GPT-4 model.
+
 ## Getting Started
 
 ### Prerequisites
 
-* npm or yarn to install dependencies
-* Upstash and OpenAI API keys
+-   npm or yarn to install dependencies
+-   Upstash and OpenAI API keys
 
 ### Installation
 

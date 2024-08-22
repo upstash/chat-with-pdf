@@ -31,8 +31,5 @@
         "src/lib/upstash-vector-db.js",
         "src/utils/rag-chat.ts"
     ],
-    "exclude": [
-        "node_modules",
-        "src/pages/api/embedding-generator.ts"
-    ]
+    "exclude": ["node_modules", "src/pages/api/embedding-generator.ts"]
 }

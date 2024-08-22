@@ -15,28 +15,21 @@ export function ChatComponent() {
         })
 
     const [fileUrl, setFileUrl] = useState<string>('')
+    const [uploadedPdf, setUploadedPdf] = useState<File>()
     const [isFileUploaded, setIsFileUploaded] = useState<boolean>(false)
     const [msg, setMsg] = useState<string>('')
 
     async function handleUpload() {
         if (fileUrl && !isFileUploaded) {
             setMsg('Uploading...')
-            
-            // Fetch the file and extract the text
-            const responseToBlob = await fetch(fileUrl)
-            const blob = await responseToBlob.blob()
-            const arrayBuffer = await new Response(blob).arrayBuffer()
-            const uint8Array = new Uint8Array(arrayBuffer)
-
             const response = await fetch('/api/pdf-extractor', {
                 method: 'POST',
-                body: JSON.stringify({ data: Array.from(uint8Array) }),
+                body: JSON.stringify({ data: uploadedPdf }),
                 headers: {
                     'Content-Type': 'application/json',
                     'req-type': 'fileUpload',
                 },
             })
-
             if (response.ok) {
                 setIsFileUploaded(true)
                 setMsg('File uploaded successfully')
@@ -64,6 +57,20 @@ export function ChatComponent() {
         if (files && files.length > 0) {
             const selectedPdf = files[0]
             setFileUrl(URL.createObjectURL(selectedPdf))
+            const formData = new FormData()
+            formData.append('file', selectedPdf)
+
+            const response = await fetch('/api/uploads', {
+                method: 'POST',
+                body: formData,
+            })
+
+            if (response.ok) {
+                const data = await response.json()
+                setUploadedPdf(data.filePath)
+            } else {
+                console.log('Error:', response.status)
+            }
         }
     }
 
